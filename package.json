@@ -8,7 +8,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "./node_modules/.bin/deploy"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +25,7 @@
     "baqend": "^2.8.0",
     "bootstrap-sass": "^3.3.7",
     "core-js": "^2.4.1",
+    "ng-deploy-gh-pages": "^1.0.1",
     "rxjs": "^5.4.1",
     "zone.js": "^0.8.12"
   },

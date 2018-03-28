@@ -7,17 +7,18 @@ import { AppComponent } from './app.component';
 import { DB_PROVIDERS } from './db';
 import { SignupComponent } from './signup/signup.component';
 import { TunesComponent } from './tunes/tunes.component';
+import { TunesModule } from './tunes/tunes.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent,
-    TunesComponent
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TunesModule
   ],
   providers: [DB_PROVIDERS],
   bootstrap: [AppComponent]
