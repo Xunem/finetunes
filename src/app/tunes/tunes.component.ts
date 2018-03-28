@@ -11,8 +11,7 @@ import 'rxjs/add/operator/do';
   styleUrls: ['./tunes.component.scss']
 })
 export class TunesComponent implements OnInit {
-  client_id = "3a95841906b141b9a5e10014744ae040";
-  client_secret = "36ec021cbd9948749d0a02abf9deaeba";
+  
   private accessToken: any;
   private tokenType: string;
 
@@ -28,9 +27,11 @@ export class TunesComponent implements OnInit {
             .find()
             .resultList()
             .then(tunes => this.tunes = tunes);
-
-            this.login().subscribe(() => {
-              this.searchAlbums();
+            this.login();
+            this.login().then((value) => {
+                this.accessToken = value.accessToken;
+                this.tokenType = value.tokenType;
+                this.searchAlbums();
             });
            
         }
@@ -40,22 +41,8 @@ export class TunesComponent implements OnInit {
   }
 
   login() {
-    let authorizationTokenUrl = `https://accounts.spotify.com/api/token`;
-
-    let header = new Headers();
-    header.append('Authorization', 'Basic  ' + btoa(this.client_id + ':' + this.client_secret));
-    header.append('Content-Type', 'application/x-www-form-urlencoded;');
-
-    let options = new RequestOptions({ headers: header });
-    let body = 'grant_type=client_credentials';
-    return this.http.post(authorizationTokenUrl, body, options)
-      .map(data => data.json())
-      .do(token => {
-        this.accessToken = token.access_token;
-        this.tokenType = token.token_type;
-      }, error => console.log(error));
-    
-  }
+    return db.modules.get('spauth');
+   }
 
   searchAlbums() {
     const options = this.getOptions();
