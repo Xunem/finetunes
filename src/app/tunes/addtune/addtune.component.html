@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-6 col-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">Add Tune</div>
+        <div class="panel-body">
+          <form #form="ngForm">
+            <div class="row">
+              <div class="form-group col-lg-12">
+                <label>Artist</label>
+                <input type="text" [(ngModel)]="tune.artist" class="form-control" name="artist" required>
+              </div>
+              <div class="form-group col-lg-12">
+                <label>Title</label>
+                <input type="text" [(ngModel)]="tune.title" class="form-control" name="title" required>
+              </div>
+            </div>
+            <div class="pull-right">
+              <button class="btn btn-info" type="button" (click)="search()" [disabled]="!form.valid">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="alert alert-danger" role="alert" [hidden]="!error">{{error}}</div>
+    </div>
+  </div>
+  
