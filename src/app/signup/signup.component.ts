@@ -9,6 +9,8 @@ import { db } from 'baqend';
 })
 export class SignupComponent {
 
+  
+
   user = {
     name: '',
     password: ''
@@ -16,22 +18,19 @@ export class SignupComponent {
   error;
 
   constructor(private router: Router) {
-    if (db.User.me) {
-      this.router.navigate(['/signup/me']);
-    }
-  }
 
-  register() {
-    db.User.register(this.user.name, this.user.password).then(() => {
-      this.router.navigate(['/signup/me']);
-    }, (error) => {
-      this.error = error.message;
+    db.ready().then(() => {
+      if (db.User.me) {
+        this.router.navigate(['/tunes']);
+      }
+      
     });
   }
 
+
   logIn() {
     db.User.login(this.user.name, this.user.password).then(() => {
-      this.router.navigate(['/signup/me']);
+      this.router.navigate(['/tunes']);
     }, (error) => {
       this.error = error.message;
     });

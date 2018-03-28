@@ -3,7 +3,8 @@ import {binding, GeoPoint} from 'baqend';
 declare module 'baqend' {
 
   interface baqend {
-    Message: binding.EntityFactory<model.Message>;
+    Tune: binding.EntityFactory<model.Tune>;
+    Comment: binding.EntityFactory<model.Comment>
   }
 
   namespace model {
@@ -21,10 +22,23 @@ declare module 'baqend' {
       inactive: boolean;
     }
 
-    interface Message extends binding.Entity {
-      name: string;
+    interface Comment extends binding.Entity{
+      author: User;
       text: string;
-      face: string;
+    }
+
+    interface Tune extends binding.Entity {
+      Author: User;
+      artist: string;
+      title: string;
+      dsc: string;
+      ytlink: string;
+      splink: string;
+      vilink: string;
+      otlink: string;
+      genre: string;
+      likes: Set<User>;
+      comments: Set<Comment>;
     }
 
   }
