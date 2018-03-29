@@ -13,10 +13,29 @@
                 <label>Title</label>
                 <input type="text" [(ngModel)]="tune.title" class="form-control" name="title" required>
               </div>
+              <div class="form-group col-lg-12">
+                  <label>Spotify ID</label>
+                  <input type="text" [(ngModel)]="tune.splink" class="form-control" name="splink" disabled>
+                </div>
             </div>
             <div class="pull-right">
               <button class="btn btn-info" type="button" (click)="search()" [disabled]="!form.valid">Search</button>
             </div>
+            
+          </form>
+          <form #form="ngForm">
+            <div class="spsuggest">
+                
+                <div *ngFor="let track of spsuggest">
+                  <div class="radiobtn">
+                    <input name="spsuggest" ng-control="options" type="radio" [value]="track.id"  [(ngModel)]="tune.splink">
+                  </div>
+                  <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(track.uri)' width="80%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </div>
+                <div class="pull-right">
+                  <button class="btn btn-info" type="button" (click)="add()" [disabled]="!addBtn">Add</button>
+                </div>
+              </div>
           </form>
         </div>
       </div>
