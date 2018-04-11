@@ -1,16 +1,156 @@
-.spsuggest{
-    padding-top:40px;
+
+.results ul{
+    list-style: none;
+    height:40px;
+    padding:0px;
 }
+
+.results li{
+    float:left;
+
+}
+
+.results li span{
+    display:block;
+    width:100px;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    cursor: pointer;
+    font-size:20px;
+    font-weight:bold;
+
+    &:hover{
+        background-color:rgb(233, 233, 233);
+    }
+}
+
 .spsuggest div{
     margin:0px;
 }
-.spsuggest .radiobtn{
-    float:left;
-    display: block;
-    width:20%;
-    height:60px;
-}
+
 .radiobtn input{
     display: inline-block;
     vertical-align: top;
+}
+.ytsuggest{
+    border:1px solid #282828;
+    background-color:rgb(233, 233, 233);
+}
+.ytsaved{
+    border:1px solid #282828;
+    background-color:rgb(233, 233, 233);
+}
+.ytsaved .yttitle{
+    display:block;
+    line-height: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left:10%;
+    width:100%;
+    font-weight:bold;
+}
+.spsuggest{
+    border:1px solid #282828;
+    background-color:rgb(233, 233, 233);
+}
+
+.listenbar{
+    width:100%;
+}
+.listenbar span{
+    margin:auto;
+    display:block;
+    cursor:pointer;
+    text-align:center;
+    background-color:#282828;
+    color:white;
+    font-weight:bold;
+    width:200px;
+    border-radius: 15px 15px 0 0;
+}
+
+.listen{
+    background-color:#282828;
+    overflow:hidden;
+    -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+}
+
+.input-helper {
+    position: relative;
+    display: inline-block;
+    width:100%;
+    cursor: pointer;
+    line-height: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+    }
+}
+
+.input-helper--radio {
+    padding-left: 10%;
+
+    &:before {
+        top: 20px;
+        left: 20px;        
+        width: 18px;
+        height: 18px;
+        border: 2px solid black;
+        border-radius: 100%;
+        background: #fff;
+    }
+    &:after{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        border-radius: 100%;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+    
+}
+
+.spsuggest .input-helper--radio{
+    &:after{
+        background: rgb(22, 121, 2);
+    }
+}
+
+.ytsuggest .input-helper--radio{
+    &:after{
+        background: rgb(121, 2, 2);
+    }
+}
+
+.radiobtn {
+    display: none;
+
+    &:not(:checked)  + label:after {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    &:checked+ label:after{
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+.savebtn{
+    height:40px;
+}
+.savebtn button{
+    float:right;
 }

@@ -4,7 +4,8 @@ declare module 'baqend' {
 
   interface baqend {
     Tune: binding.EntityFactory<model.Tune>;
-    Comment: binding.EntityFactory<model.Comment>
+    Comment: binding.EntityFactory<model.Comment>;
+    Profile: binding.EntityFactory<model.Profile>;
   }
 
   namespace model {
@@ -22,14 +23,19 @@ declare module 'baqend' {
       inactive: boolean;
     }
 
+    interface Profile extends binding.Entity{
+      Username: string;
+      user: string;
+    }
+
     interface Comment extends binding.Entity{
       author: User;
       text: string;
     }
 
     interface Tune extends binding.Entity {
-      Author: User;
-      artist: string;
+      author: string;
+      artists: Set<string>;
       title: string;
       dsc: string;
       ytlink: string;
@@ -39,6 +45,7 @@ declare module 'baqend' {
       genre: string;
       likes: Set<User>;
       comments: Set<Comment>;
+      img: string;
     }
 
   }

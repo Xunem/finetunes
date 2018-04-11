@@ -1,41 +1,135 @@
-<div class="row">
+<div class="row" style="margin-top:20px;">
     <div class="col-sm-offset-3 col-sm-6 col-1">
       <div class="panel panel-default">
         <div class="panel-heading">Add Tune</div>
         <div class="panel-body">
-          <form #form="ngForm">
+          <form #form="ngForm" (keyup.enter)="search()">
             <div class="row">
               <div class="form-group col-lg-12">
                 <label>Artist</label>
-                <input type="text" [(ngModel)]="tune.artist" class="form-control" name="artist" required>
+                <input type="text" [(ngModel)]="tune.artistq" class="form-control" name="artistq">
               </div>
               <div class="form-group col-lg-12">
                 <label>Title</label>
-                <input type="text" [(ngModel)]="tune.title" class="form-control" name="title" required>
+                <input type="text" [(ngModel)]="tune.title" class="form-control" name="title">
               </div>
+              
               <div class="form-group col-lg-12">
-                  <label>Spotify ID</label>
-                  <input type="text" [(ngModel)]="tune.splink" class="form-control" name="splink" disabled>
+                  <label>Genre</label>
+                  <input type="text" [(ngModel)]="tune.genre" class="form-control" name="genre">
                 </div>
+
+              <div class="form-group col-lg-12">
+                  <label>Youtube ID</label>
+                  <input type="text" [(ngModel)]="tune.ytlink" class="form-control" name="ytlink" disabled>
+                </div>
+
+              <div class="form-group col-lg-12">
+                <label>Spotify ID</label>
+                <input type="text" [(ngModel)]="tune.splink" class="form-control" name="splink" disabled>
+              </div>
             </div>
-            <div class="pull-right">
+            <div class="savebtn">
               <button class="btn btn-info" type="button" (click)="search()" [disabled]="!form.valid">Search</button>
             </div>
             
           </form>
-          <form #form="ngForm">
-            <div class="spsuggest">
-                
-                <div *ngFor="let track of spsuggest">
-                  <div class="radiobtn">
-                    <input name="spsuggest" ng-control="options" type="radio" [value]="track.id"  [(ngModel)]="tune.splink">
-                  </div>
-                  <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(track.uri)' width="80%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                </div>
-                <div class="pull-right">
-                  <button class="btn btn-info" type="button" (click)="add()" [disabled]="!addBtn">Add</button>
-                </div>
+
+          <form #form="ngForm" *ngIf="results" class="results">
+
+            <ul>
+              <li>
+                <span (click)="addSrc = 'YT'" [ngStyle]="{'background-color':addSrc === 'YT' ? 'rgb(233, 233, 233)' : ''}">+ YT</span>
+              </li>
+              <li>
+                <span (click)="addSrc = 'SP'" [ngStyle]="{'background-color':addSrc === 'SP' ? 'rgb(233, 233, 233)' : ''}">+ SP</span>
+              </li>
+            </ul>
+
+            <div [ngSwitch]="addSrc">
+
+              <div *ngSwitchCase="'YT'">
+                  <div *ngIf="!ytsaved;else yt_saved">
+                      <div *ngFor="let track of ytsuggest" class="ytsuggest">
+                        <div>
+                          <input name="ytsuggest" [id]="track.id" ng-control="options" class="radiobtn" type="radio" [value]="track.id"  [(ngModel)]="tune.ytlink">
+                          <label [for]="track.id" class="input-helper input-helper--radio">{{track.title}}</label>
+                        </div>
+                        <div class="listenbar">
+                            <span (click)="showListenBar(track.id)">Ansehen</span>
+                        </div>
+                        
+                        <div [id]="'frame'+track.id" *ngIf="showDetails[track.id]" class="listen">
+                            <iframe id="ytplayer" type="text/html" width="100%" height="400" [src]='sanitizer.bypassSecurityTrustResourceUrl(track.uri)'
+                              frameborder="0"></iframe>
+                        </div>
+                        
+                      </div>
+                      <div class="savebtn">
+                          <button class="btn btn-info" type="button" (click)="addYt()" [disabled]="!addBtn">Add Youtube</button>
+                        </div>
+      
+                    </div>
+
+                    <ng-template #yt_saved>
+                        <div class="ytsaved">
+                          <span class="yttitle">{{tune.yttitle}}</span>
+                          
+                          <div class="listenbar">
+                              <span (click)="showListenBar(tune.ytlink)">Ansehen</span>
+                          </div>
+                          
+                          <div [id]="'frame'+tune.ytlink" *ngIf="showDetails[tune.ytlink]" class="listen">
+                              <iframe id="ytplayer" type="text/html" width="100%" height="400" [src]='sanitizer.bypassSecurityTrustResourceUrl(tune.yturi)'
+                                frameborder="0"></iframe>
+                          </div>
+                        </div>
+                    </ng-template>
               </div>
+
+              <div *ngSwitchCase="'SP'">
+                  <div *ngIf="!spsaved;else sp_saved">
+                      <div *ngFor="let track of spsuggest" class="spsuggest">
+                        <div>
+                          <input name="spsuggest" [id]="track.id" class="radiobtn" ng-control="options" type="radio" [value]="track.id"  [(ngModel)]="tune.splink">
+                          <label [for]="track.id" class="input-helper input-helper--radio">{{track.artists}} - {{track.title}}</label>
+                        </div>
+                        <div class="listenbar">
+                            <span (click)="showListenBar(track.id)">Reinhören</span>
+                        </div>
+                        
+                        <div [id]="'frame'+track.id" *ngIf="showDetails[track.id]" style="height:80px;" class="listen">
+                            <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(track.uri)' width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        </div>
+                        
+                      </div>
+                      <div class="savebtn">
+                        <button class="btn btn-info" type="button" (click)="addSp()" [disabled]="!addBtn">Add Spotify</button>
+                      </div>
+                    </div>
+                  
+                    <ng-template #sp_saved>
+                        <div class="ytsaved">
+                          <span class="yttitle">{{tune.spartists}} - {{tune.sptitle}}</span>
+                          
+                          <div class="listenbar">
+                              <span (click)="showListenBar(tune.splink)">Anhören</span>
+                          </div>
+                          
+                          <div [id]="'frame'+tune.splink" *ngIf="showDetails[tune.splink]" class="listen">
+                              <iframe id="ytplayer" type="text/html" width="100%" height="400" [src]='sanitizer.bypassSecurityTrustResourceUrl(tune.spuri)'
+                                frameborder="0"></iframe>
+                          </div>
+                        </div>
+                      </ng-template>
+
+              </div>
+
+            </div>
+              
+            <div class="savebtn">
+                <button class="btn btn-info" type="button" (click)="add()" [disabled]="!addBtn">Save track</button>
+            </div>
           </form>
         </div>
       </div>

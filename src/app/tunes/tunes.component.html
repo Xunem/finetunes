@@ -1,18 +1,49 @@
+<div class="wrapper">
+<div class="userctrl">
+  Hallo du Nutte aka {{currentUser}}
+  <span (click)="logout()">Logout</span>
+</div>
+
+
 <app-addtune></app-addtune>
+
+<button class="btn btn-info" style="display: block; margin:auto;" type="button" (click)="loadTunes()" >Reload</button>
+
 <div class="row">
   <div class="col-xs-10 col-xs-offset-1" >
-    <div *ngFor="let tune of tunes" class="panel panel-default">
+    <div *ngFor="let tune of tunes" class="panel panel-default tune">
       <div class="panel-heading">
-        <h3 class="panel-title">{{ tune.artist }} - {{ tune.title }}</h3>
+
+        <h3 class="panel-title"><span style="font-weight:bold">{{getArtistsString(tune.artists)}}</span> - {{ tune.title }}</h3>
       </div>
-      <div class="panel-body">
-        <div class="row">
-          
-          <div class="col-xs-11">
-            {{ tune.dsc }}
-          </div>
+      <div class="tunebody" [ngStyle]="{'background-image': 'url('+tune.img+')'}">
+
+      
+        <div class="tunenav">
+          <ul>
+            <li (click)="tuneNav[tune.id] = 'NF'"><span>Info</span></li>
+            <li (click)="tuneNav[tune.id] = 'YT'"><span><img [src]="yt_logo"></span></li>
+            <li (click)="tuneNav[tune.id] = 'SP'"><span><img [src]="sp_logo"></span></li>
+          </ul>
+          <span class="user">{{tune.author}}</span>
         </div>
-      </div>
+        <div [ngSwitch]="tuneNav[tune.id]" style="height:590px">
+            <div *ngSwitchCase="'NF'">
+                <span class="genre">{{ tune.genre }}</span>
+            </div>
+
+            <div *ngSwitchCase="'YT'" style="height:100%">
+                <iframe id="ytplayer" type="text/html" width="100%" height="100%" [src]='getUri(tune)'
+                frameborder="0"></iframe>
+            </div>
+
+            <div *ngSwitchCase="'SP'" style="height:100%;">
+              <iframe [src]='getSpUri(tune)' width="100%" height="100%" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+          </div>
+
+      </div>  
     </div>
   </div>
+</div>
 </div>

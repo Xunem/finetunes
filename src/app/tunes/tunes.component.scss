@@ -1,3 +1,33 @@
+.wrapper{
+  background-image: url("https://metrouk2.files.wordpress.com/2016/05/85216702.jpg");
+  background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment:fixed;
+    margin:0;
+    overflow-y:hidden;
+}
+
+.userctrl{
+  margin:10px;
+  position:absolute;
+  top:0;
+  right:0;
+  text-align:right;
+  font-size: 14pt;
+  
+
+  span{
+    display:block; 
+    cursor:pointer; 
+    font-weight: bold;
+
+    &:hover{
+      text-decoration: underline;
+    }
+
+  }
+}
+
 .row {
   margin-top: 20px
 }
@@ -7,4 +37,75 @@ img {
 }
 
 .panel {
+  width: 642px;
+  margin:auto;
+  margin-top:20px;
+}
+
+.tunebody{
+  width:640px;
+  height:640px;
+  position: relative;
+}
+
+.tunenav{
+  height: 50px;
+  background: rgba(255, 255, 255, 0.9);
+  ul{
+    margin:0;
+    padding:0;
+    list-style: none;
+  }
+  li{
+    float:left;
+
+    span{
+      padding:10px 20px;
+      display:block;
+      height:50px;
+      line-height: 30px;
+      font-weight:bold;
+      cursor:pointer;
+      
+
+     &:hover{
+       background: white;
+       -webkit-transition: background-color 300ms linear;
+       -ms-transition: background-color 300ms linear;
+       transition: background-color 300ms linear;
+     }
+  
+      img{
+        max-height:30px;
+        width: auto;
+        height: auto;
+      }
+    }
+   }
+}
+
+.user{
+  float:right;
+  margin:10px;
+  height:30px;
+  background-color: rgb(255, 138, 138);
+  border: 1px solid red;
+  padding: 0 10px;
+  line-height:30px;
+  border-radius: 5px;
+  font-weight:bold;
+}
+
+.genre{
+  position: absolute;
+  bottom:0;
+  display:block;
+  width:100%;
+  
+  background-color: rgba(109, 1, 1, 0.9);
+  text-align:center;
+  padding:30px;
+  font-weight:bold;
+  color:white;
+  font-size: 25pt;
 }
