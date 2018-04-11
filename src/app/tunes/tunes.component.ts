@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class TunesComponent implements OnInit {
   
   currentUser = '';
+  public oasis_bg = 'assets/85216702.jpg'
   public yt_logo = 'assets/yt_icon_rgb.png';
   public sp_logo = 'assets/Spotify_Icon_RGB_Green.png';
   public tunes: Array<model.Tune>;

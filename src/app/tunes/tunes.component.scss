@@ -1,10 +1,12 @@
 .wrapper{
-  background-image: url("https://metrouk2.files.wordpress.com/2016/05/85216702.jpg");
+  background-image: url("/assets/85216702.jpg");
   background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: auto 100%;
     background-attachment:fixed;
     margin:0;
-    overflow-y:hidden;
+    overflow-x:hidden;
+    background-color: black;
+    background-position: center;
 }
 
 .userctrl{
@@ -29,7 +31,8 @@
 }
 
 .row {
-  margin-top: 20px
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 img {

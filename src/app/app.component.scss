@@ -19,4 +19,13 @@ html, body{
 
 h1{
   text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 5px;
+  border-bottom:3px dotted black;
+  display:block;
+  line-height: 50px;
+}
+.container{
+  padding-bottom:5px;
 }

@@ -114,7 +114,7 @@ export class AddtuneComponent implements OnInit {
           this.ytsuggest.push({
             id: track.id.videoId,
             title: track.snippet.title,
-            uri: "http://www.youtube.com/embed/"+track.id.videoId
+            uri: "https://www.youtube.com/embed/"+track.id.videoId
           });
         }
         this.results = true;
@@ -222,7 +222,7 @@ export class AddtuneComponent implements OnInit {
       for(let track of data){
         console.log(track);
         this.tune.yttitle = track.snippet.title;
-        this.tune.yturi = "http://www.youtube.com/embed/"+this.tune.ytlink;
+        this.tune.yturi = "https://www.youtube.com/embed/"+this.tune.ytlink;
         this.ytsaved = true;
       }
     });
