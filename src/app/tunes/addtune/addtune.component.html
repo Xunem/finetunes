@@ -39,10 +39,10 @@
 
             <ul>
               <li>
-                <span (click)="addSrc = 'YT'" [ngStyle]="{'background-color':addSrc === 'YT' ? 'rgb(233, 233, 233)' : ''}">+ YT</span>
+                <span (click)="addSrc = 'YT'" [ngStyle]="{'background-color':addSrc === 'YT' ? 'rgb(233, 233, 233)' : ''}">+ <img [src]="yt_logo" height="25"></span>
               </li>
               <li>
-                <span (click)="addSrc = 'SP'" [ngStyle]="{'background-color':addSrc === 'SP' ? 'rgb(233, 233, 233)' : ''}">+ SP</span>
+                <span (click)="addSrc = 'SP'" [ngStyle]="{'background-color':addSrc === 'SP' ? 'rgb(233, 233, 233)' : ''}">+ <img [src]="sp_logo" height="25"></span>
               </li>
             </ul>
 

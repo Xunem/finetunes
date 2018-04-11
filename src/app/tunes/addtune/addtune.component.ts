@@ -16,6 +16,9 @@ export class AddtuneComponent implements OnInit {
     currentUser: model.Profile;
     accessToken: any;
     tokenType: string;
+
+    public yt_logo = 'assets/yt_icon_rgb.png';
+    public sp_logo = 'assets/Spotify_Icon_RGB_Green.png';
   
     private spApiUrl = "https://api.spotify.com/v1/search?q=herbert&type=track"
 
@@ -259,6 +262,8 @@ export class AddtuneComponent implements OnInit {
      this.spsuggest = [];
      this.addBtn = false;
      this.results = false;
+     this.ytsaved = false;
+     this.spsaved = false;
    }
 
    private getOptions() {

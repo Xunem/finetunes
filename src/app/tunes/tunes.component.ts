@@ -26,9 +26,7 @@ export class TunesComponent implements OnInit {
           this.router.navigate(['/signup']);
         } else{
            this.loadTunes().then(() => {
-            for(var tune of this.tunes){
-              this.tuneNav[tune.id] = 'NF';
-             } 
+             
            });
            this.getCurrentUser();
          }
@@ -42,7 +40,12 @@ export class TunesComponent implements OnInit {
     .find()
     .descending('createdAt')
     .resultList()
-    .then(tunes => this.tunes = tunes);
+    .then(tunes => {
+      this.tunes = tunes;
+      for(var tune of this.tunes){
+        this.tuneNav[tune.id] = 'NF';
+      }
+    });
   }
 
   getArtistsString(artists){
