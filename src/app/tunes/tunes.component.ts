@@ -61,7 +61,7 @@ export class TunesComponent implements OnInit {
   }
 
   getUri(tune){
-    return this.sanitizer.bypassSecurityTrustResourceUrl("http://www.youtube.com/embed/"+tune.ytlink);
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/"+tune.ytlink);
   }
 
   getSpUri(tune){
